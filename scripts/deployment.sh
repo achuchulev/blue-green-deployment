@@ -1,45 +1,46 @@
 #!/usr/bin/env bash
 
-UPSTREAMS="
-upstream backend_blue-green {
-        server localhost:81;
-        server localhost:82;
-}
-
-upstream backend_green {
-     server localhost:81;
+UPSTREAMS="upstream backend_blue-green {
+     server localhost:8081;
+     server localhost:8082;
 }
 
 upstream backend_blue {
-        server localhost:82;
+     server localhost:8081;
+}
+
+upstream backend_green {
+        server localhost:8082;
 }
 
 server {
-        listen 80;
-        location / {
-            proxy_pass http://backend_$1;
-        }
+   listen 80; 
+
+   location / {
+      proxy_pass http://backend_$1;
+   }
 }
 "
+if [ "$#" -lt "1" ]; then
+  echo "argument missing!"
+  exit 1
+fi
 
-if [ "$1" == "green" ]
-then
+if [ "$1" == "green" ]; then
 cat <<EOF > /etc/nginx/conf.d/load-balancer.conf
 $UPSTREAMS
 EOF
 sudo nginx -s reload
 exit 0
 
-elif [ "$1" == "blue" ]
-then
+elif [ "$1" == "blue" ]; then
 cat <<EOF > /etc/nginx/conf.d/load-balancer.conf
 $UPSTREAMS
 EOF
 sudo nginx -s reload
 exit 0
 
-elif [ "$1" == "blue-green" ]
-then
+elif [ "$1" == "blue-green" ]; then
 cat <<EOF > /etc/nginx/conf.d/load-balancer.conf
 $UPSTREAMS
 EOF
@@ -47,7 +48,7 @@ sudo nginx -s reload
 exit 0
 
 else
-echo "Wrong deployment method - only 'blue', 'green' or 'blue-green' allowed !!!"
+echo "Incorrect argument - only 'blue', 'green' or 'blue-green' allowed!"
 exit 1
 
 fi                                                                                                                  
