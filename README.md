@@ -7,12 +7,13 @@ Simple proof of concept of blue-green-deployment strategy with:
 - Bash shell script (manages the deployment)
 - Nginx as a load-balancer (provides easy & fast switching between backends)
 
-## How to run
-
-Requirements:
+### Requirements:
 
 - vagrant
 - git
+- virtualbox
+
+## How to run
 
 * Get the repo and bring up the environment
 
