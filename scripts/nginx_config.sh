@@ -20,11 +20,15 @@ which nginx &>/dev/null || {
 # Configure nginx
 echo "Configuring nginx virtual hosts...."
 
+# Configure nginx virtual hosts
+
+# Create root html content directory for each virtal host
 pushd /var/www/
 sudo mkdir -p green/html
 sudo mkdir -p blue/html
 popd
 
+# virtal host blue
 sudo bash -c 'cat<<EOF > /var/www/blue/html/index.html
 <html>
   <body style="background-color:powderblue;">
@@ -37,6 +41,7 @@ sudo bash -c 'cat<<EOF > /var/www/blue/html/index.html
 </html>
 EOF'
 
+# virtal host green
 sudo bash -c 'cat<<EOF > /var/www/green/html/index.html
 <html>
   <body style="background-color:#00ffcc;">
@@ -49,49 +54,16 @@ sudo bash -c 'cat<<EOF > /var/www/green/html/index.html
 </html>
 EOF'
 
-# sudo bash -c 'cat<<EOF > /etc/nginx/sites-available/blue
-# server {
-#         listen 8081;
-#         listen [::]:8081;
-
-#         root /var/www/blue/html;
-
-#         index index.html index.htm index.nginx-debian.html;
-
-#         server_name _;
-
-#         location / {
-#                 # First attempt to serve request as file, then
-#                 # as directory, then fall back to displaying a 404.
-#                 try_files $uri $uri/ =404;
-#         }
-# }
-# EOF'
-
-# sudo bash -c 'cat<<EOF > /etc/nginx/sites-available/green
-# server {
-#         listen 8082;
-#         listen [::]:8082;
-
-#         root /var/www/green/html;
-
-#         index index.html index.htm index.nginx-debian.html;
-
-#         server_name _;
-
-#         location / {
-#                 # First attempt to serve request as file, then
-#                 # as directory, then fall back to displaying a 404.
-#                 try_files $uri $uri/ =404;
-#         }
-# }
-# EOF'
-
+# Copy virtal hosts' configurations
 sudo cp /vagrant/config/* /etc/nginx/sites-available/
+
+# Activate virtal hosts
 sudo ln -s /etc/nginx/sites-available/blue /etc/nginx/sites-enabled/blue
 sudo ln -s /etc/nginx/sites-available/green /etc/nginx/sites-enabled/green
 
+# Remove default web server configuration
 sudo rm /etc/nginx/sites-enabled/default
 sudo service nginx restart
 
+# Activate blue deployment by default
 sudo /vagrant/scripts/deployment.sh blue
