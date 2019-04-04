@@ -34,6 +34,6 @@ vagrant up
 vagrant ssh
 cd /vagrant/scripts
 
-# manage deployments with argument blue, green or blue-green
+# manage deployments using blue, green or blue-green as argument
 ./deployment.sh argument
 ```
