@@ -22,13 +22,13 @@ echo "Configuring nginx virtual hosts...."
 
 # Configure nginx virtual hosts
 
-# Create root html content directory for each virtal host
+# Create root html content directory for each virtual host
 pushd /var/www/
 sudo mkdir -p green/html
 sudo mkdir -p blue/html
 popd
 
-# virtal host blue
+# virtual host blue
 sudo bash -c 'cat<<EOF > /var/www/blue/html/index.html
 <html>
   <body style="background-color:powderblue;">
@@ -41,7 +41,7 @@ sudo bash -c 'cat<<EOF > /var/www/blue/html/index.html
 </html>
 EOF'
 
-# virtal host green
+# virtual host green
 sudo bash -c 'cat<<EOF > /var/www/green/html/index.html
 <html>
   <body style="background-color:#00ffcc;">
@@ -54,10 +54,10 @@ sudo bash -c 'cat<<EOF > /var/www/green/html/index.html
 </html>
 EOF'
 
-# Copy virtal hosts' configurations
+# Copy virtual hosts' configurations
 sudo cp /vagrant/config/* /etc/nginx/sites-available/
 
-# Activate virtal hosts
+# Activate virtual hosts
 sudo ln -s /etc/nginx/sites-available/blue /etc/nginx/sites-enabled/blue
 sudo ln -s /etc/nginx/sites-available/green /etc/nginx/sites-enabled/green
 
@@ -65,5 +65,5 @@ sudo ln -s /etc/nginx/sites-available/green /etc/nginx/sites-enabled/green
 sudo rm /etc/nginx/sites-enabled/default
 sudo service nginx restart
 
-# Activate blue deployment by default
+# Activate blue deployment as default
 sudo /vagrant/scripts/deployment.sh blue
