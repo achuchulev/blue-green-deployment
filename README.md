@@ -18,9 +18,9 @@ Simple proof of concept of blue-green-deployment strategy with:
 * Get the repo and bring up the environment
 
 ```
-git clone https://github.com/achuchulev/blue-green-deployment.git
-cd blue-green-deployment
-vagrant up
+$ git clone https://github.com/achuchulev/blue-green-deployment.git
+$ cd blue-green-deployment
+$ vagrant up
 ```
 
 * Run `vagrant up` that will spin up a virtualbox vm and execute script that:
@@ -32,11 +32,11 @@ vagrant up
 ### Manage deployments
 
 ```
-vagrant ssh
-cd /vagrant/scripts
+$ vagrant ssh
+$ cd /vagrant/scripts
 
 # manage deployments using blue, green or blue-green as argument
-./deployment.sh argument
+$ sudo ./deployment.sh argument
 ```
 
 <img src="diagrams/blue-green-deployment.png" />
