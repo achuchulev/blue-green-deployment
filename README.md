@@ -37,3 +37,5 @@ cd /vagrant/scripts
 # manage deployments using blue, green or blue-green as argument
 ./deployment.sh argument
 ```
+
+<img src="diagrams/blue-green-deploymentd.png" />
