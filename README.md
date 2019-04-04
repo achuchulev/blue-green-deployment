@@ -38,4 +38,4 @@ cd /vagrant/scripts
 ./deployment.sh argument
 ```
 
-<img src="diagrams/blue-green-deploymentd.png" />
+<img src="diagrams/blue-green-deployment.png" />
