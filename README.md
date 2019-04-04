@@ -39,4 +39,6 @@ $ cd /vagrant/scripts
 $ sudo ./deployment.sh argument
 ```
 
+> [Go to Web app](http://192.168.0.10)
+
 <img src="diagrams/blue-green-deployment.png" />
