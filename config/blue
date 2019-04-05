@@ -1,6 +1,5 @@
 server {
         listen 8081;
-        listen [::]:8081;
 
         root /var/www/blue/html;
 
@@ -14,5 +13,4 @@ server {
                 # as directory, then fall back to displaying a 404.
                 try_files $uri $uri/ =404;
         }
-
 }
